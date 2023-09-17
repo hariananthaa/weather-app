@@ -12,7 +12,7 @@ function App() {
     ) as HTMLInputElement;
 
     await fetch(
-      `https://api.openweathermap.org/data/2.5/weather/?q=${inputElement?.value}&units=metric&APPID=7c6410a650a22c83550af3b0bcf2b912`
+      `${process.env.REACT_APP_WEATHER_API_URL}/weather/?q=${inputElement?.value}&units=metric&APPID=${process.env.REACT_APP_WEATHER_API_KEY}`
     )
       .then((res) => res.json())
       .then((result) => {
@@ -33,7 +33,7 @@ function App() {
       console.log(position);
 
       await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=7c6410a650a22c83550af3b0bcf2b912`
+        `${process.env.REACT_APP_WEATHER_API_URL}/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
       )
         .then((res) => res.json())
         .then((result) => {
