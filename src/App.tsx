@@ -88,45 +88,44 @@ function App() {
           <h1>Fetching weather...</h1>
         ) : isError ? (
           <h1>{isError}</h1>
+        ) : response !== undefined && response.cod === "404" ? (
+          <h1>{response.message}</h1>
         ) : (
-          response !== undefined && (
-            <div>
+          <div className="mt-3">
+            {response !== undefined && (
               <div className="border-t text-center pt-4 text-xl border-b-blue-500 w-full">
                 Weather details
               </div>
-              <div className="mt-3">
-                {response?.main && (
-                  <div className="text-center">
-                    <img
-                      src={`http://openweathermap.org/img/w/${response.weather[0].icon}.png`}
-                      alt="weather status icon"
-                      className="weather-icon mx-auto"
-                    />
-                    <p className="h2">
-                      Temperature : {response.main.temp}&deg; C
+            )}
+
+            {response?.main && (
+              <div className="text-center">
+                <img
+                  src={`http://openweathermap.org/img/w/${response.weather[0].icon}.png`}
+                  alt="weather status icon"
+                  className="weather-icon mx-auto"
+                />
+                <p className="h2">Temperature : {response.main.temp}&deg; C</p>
+
+                <div className="flex justify-center space-x-2">
+                  <div>Location: </div>
+                  <p className="h5">
+                    <i className="fas fa-map-marker-alt"></i>{" "}
+                    <strong>{response.name}</strong>
+                  </p>
+                </div>
+
+                <div className="">
+                  <div className="">
+                    <p>
+                      {" "}
+                      <strong>{response.weather[0].main}</strong>
                     </p>
-
-                    <div className="flex justify-center space-x-2">
-                      <div>Location: </div>
-                      <p className="h5">
-                        <i className="fas fa-map-marker-alt"></i>{" "}
-                        <strong>{response.name}</strong>
-                      </p>
-                    </div>
-
-                    <div className="">
-                      <div className="">
-                        <p>
-                          {" "}
-                          <strong>{response.weather[0].main}</strong>
-                        </p>
-                      </div>
-                    </div>
                   </div>
-                )}
+                </div>
               </div>
-            </div>
-          )
+            )}
+          </div>
         )}
       </div>
     </main>
